@@ -7,10 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class IsilplusApplication {
 
 	public static void main(String[] args) {
-
-		System.out.print("Esta es mi primera aplicacion en SpringBoot");
-
 		SpringApplication.run(IsilplusApplication.class, args);
 	}
-
 }

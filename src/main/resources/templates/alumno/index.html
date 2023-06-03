@@ -2,30 +2,43 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title >Alumnos</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+    <title>Alumno</title>
 </head>
 <body>
-    <h1 >Alumnos</h1>
 
-    <table th:if="${!alumnos.isEmpty()}">
-        <tr>
-            <th>Nombres</th>
-            <th>Apellidos</th>
-            <th>Correo</th>
-            <th>Celular</th>
-        </tr>
-
-        <tr th:each ="item : ${alumnos}">
-            <td th:text ="${item.getPrimerNombre()}"></td>
-            <td th:text ="${item.apellidos}"></td>
-            <td th:text ="${item.correo}"></td>
-            <td th:text ="${item.celular}"></td>
-        </tr>
-
-    </table>
+  <h1>Pagina Principal de Alumnos</h1>
 
 
+  <p th:if ="${18>15}"> Este parrafo se va a mostrar </p>
+  <p th:if ="${18<15}"> Este parrafo no se va a mostrar </p>
+
+  <h2 th:if="${alumnos.isEmpty()}"> No se encontraron datos</h2>
+
+  <table th:if="${!alumnos.isEmpty()}">
+      <tr>
+          <th>
+              Nombre
+          </th>
+          <th>
+              Apellido
+          </th>
+          <th>
+              Correo
+          </th>
+          <th>
+              Celular
+          </th>
+      </tr>
+
+      <tr th:each="item : ${alumnos} ">
+                <td th:text="${item.primerNombre}"></td>
+              <td th:text="${item.apellidos}"></td>
+              <td th:text="${item.correo}"></td>
+              <td th:text="${item.celular}"></td>
+      </tr>
+
+
+  </table>
 
 
 </body>
