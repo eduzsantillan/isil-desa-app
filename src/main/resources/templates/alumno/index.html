@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title >Alumnos</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+</head>
+<body>
+    <h1 >Alumnos</h1>
+
+    <table th:if="${!alumnos.isEmpty()}">
+        <tr>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Correo</th>
+            <th>Celular</th>
+        </tr>
+
+        <tr th:each ="item : ${alumnos}">
+            <td th:text ="${item.getPrimerNombre()}"></td>
+            <td th:text ="${item.apellidos}"></td>
+            <td th:text ="${item.correo}"></td>
+            <td th:text ="${item.celular}"></td>
+        </tr>
+
+    </table>
+
+
+
+
+</body>
+</html>
