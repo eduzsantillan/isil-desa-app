@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${alumno.primerNombre}"></title>
+</head>
+<body>
+
+    <h1 th:text="'Editando al alumno: ' + ${alumno.primerNombre}"></h1>
+
+
+    <div>
+        <form th:action="@{/alumno(id=${alumno.id})}" th:method="put" th:object="${alumno}" >
+            <label for ="primerNombre">Nombre :</label>
+            <input type="text" id="primerNombre" name="primerNombre" th:value="${alumno.primerNombre}"/>
+
+            <label for ="apellidos">Apellidos :</label>
+            <input type="text" id="apellidos" name="apellidos" th:value="${alumno.apellidos}"/>
+
+            <label for ="correo">Correo :</label>
+            <input type="text" id="correo" name="correo" th:value="${alumno.correo}"/>
+
+            <label for ="celular">Celular :</label>
+            <input type="text" id="celular" name="celular" th:value="${alumno.celular}"/>
+
+            <input type="submit" value="Registrar"/>
+        </form>
+    </div>
+
+
+
+</body>
+</html>

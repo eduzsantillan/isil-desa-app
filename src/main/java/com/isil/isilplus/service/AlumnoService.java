@@ -1,12 +1,13 @@
 package com.isil.isilplus.service;
 
 import com.isil.isilplus.entity.Alumno;
+import com.isil.isilplus.exception.AlumnoNoEcontradoException;
 import com.isil.isilplus.repository.AlumnoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @AllArgsConstructor
 @Service
@@ -18,17 +19,20 @@ public class AlumnoService {
         return alumnoRepository.findAll();
     }
 
-    public Alumno obtenerPorId(Long id) throws Exception {
+    public Alumno obtenerPorId(Long id)  {
+        return alumnoRepository.findById(id)
+                .orElseThrow(() -> new AlumnoNoEcontradoException(id));
+    }
 
-        Optional<Alumno> alumno = alumnoRepository.findById(id);
-
-        if(alumno.isPresent()){
-            return alumno.get();
-        }else{
-            throw new Exception("El alumno no existe");
-        }
+    public Alumno guardar(Alumno alumno){
+        return alumnoRepository.save(alumno);
+    }
 
 
+    public void eliminar(Long id){
+        alumnoRepository.delete(alumnoRepository.findById(id).orElseThrow(
+                ()-> new AlumnoNoEcontradoException(id)
+        ));
     }
 
 }
