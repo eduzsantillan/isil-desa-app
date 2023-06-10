@@ -5,15 +5,26 @@
     <title>Alumno</title>
 </head>
 <body>
-
   <h1>Pagina Principal de Alumnos</h1>
 
+  <div>
+      <form  th:action = "@{/alumno}" method="post" th:object="${alumno}">
+          <label for="primerNombre"> Nombre:</label>
+          <input type="text" id="primerNombre" name="primerNombre" />
+          <label for="apellidos"> Apellidos:</label>
+          <input type="text" id="apellidos" name="apellidos" />
+          <label for="correo"> Correo:</label>
+          <input type="text" id="correo" name="correo" />
+          <label for="celular"> Celular:</label>
+          <input type="text" id="celular" name="celular" />
+          <br>
+          <button type="submit" >Registrar</button>
+      </form>
+  </div>
 
-  <p th:if ="${18>15}"> Este parrafo se va a mostrar </p>
-  <p th:if ="${18<15}"> Este parrafo no se va a mostrar </p>
+
 
   <h2 th:if="${alumnos.isEmpty()}"> No se encontraron datos</h2>
-
   <table th:if="${!alumnos.isEmpty()}">
       <tr>
           <th>
@@ -29,17 +40,28 @@
               Celular
           </th>
       </tr>
-
       <tr th:each="item : ${alumnos} ">
-                <td th:text="${item.primerNombre}"></td>
-              <td th:text="${item.apellidos}"></td>
-              <td th:text="${item.correo}"></td>
-              <td th:text="${item.celular}"></td>
+          <td th:text="${item.primerNombre}"></td>
+          <td th:text="${item.apellidos}"></td>
+          <td th:text="${item.correo}"></td>
+          <td th:text="${item.celular}"></td>
+
+          <td >
+              <a th:href = "@{/alumno/editar(id=${item.id})}">
+                  <button type="button">Editar</button>
+              </a>
+          </td>
+
+          <td>
+
+          <form th:action="@{/alumno/eliminar(id=${item.id})}" th:method="delete">
+              <button type="submit">Eliminar</button>
+          </form>
+
+
+          </td>
+
       </tr>
-
-
   </table>
-
-
 </body>
 </html>

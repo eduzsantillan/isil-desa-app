@@ -5,11 +5,9 @@ import com.isil.isilplus.service.AlumnoService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 @AllArgsConstructor
 @Controller
@@ -22,13 +20,37 @@ public class AlumnoController {
 
     @GetMapping("")
     public String index(Model model){
-        List<Alumno> alumnoList = alumnoService.obtenerTodos();
-
-        List<String> listaVacia = new ArrayList<>();
-
-
         model.addAttribute("alumnos",
-                alumnoList);
+                alumnoService.obtenerTodos());
         return "alumno/index";
     }
+
+    @PostMapping("")
+    public String registrar(@ModelAttribute("alumno") Alumno alumno){
+        alumnoService.registrar(alumno);
+        return "redirect:/alumno";
+    }
+
+    @GetMapping("/editar")
+    public String editar(@RequestParam("id") Long id,Model model){
+        model.addAttribute("alumno", alumnoService.obtenerPorId(id));
+        return "alumno/editar";
+    }
+
+    @PutMapping("/editar")
+    public String editar(@ModelAttribute("alumno") Alumno alumno){
+        alumnoService.registrar(alumno);
+        return "redirect:/alumno";
+    }
+
+
+    @DeleteMapping("/eliminar")
+    public String eliminar(@RequestParam("id") Long id){
+        alumnoService.eliminar(id);
+        return "redirect:/alumno";
+    }
+
+
+
+
 }
